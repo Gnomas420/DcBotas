@@ -23,18 +23,18 @@ namespace DcBotas
             MainAsync(args).ConfigureAwait(false).GetAwaiter().GetResult();
         }
         static async Task MainAsync(string[] args)
-        { 
-           discord = new DiscordClient(new DiscordConfiguration()
-           { 
-           Token = "OTMyMzA3OTIwMTE1MzUxNjMz.YeRFaQ.1Vg_fe6uOZyz_Vg_R5_GucyLt9k",
-           TokenType = TokenType.Bot,
-           
-           });
+        {
+            discord = new DiscordClient(new DiscordConfiguration()
+            {
+                Token = "OTMyMzA3OTIwMTE1MzUxNjMz.YeRFaQ.atrn1wj1_VfTMguzh1od9_RSerY",
+                TokenType = TokenType.Bot,
+
+            });
 
             commands = discord.UseCommandsNext(new CommandsNextConfiguration()
             {
-              StringPrefix = "/",
-              CaseSensitive = false,
+                StringPrefix = "/",
+                CaseSensitive = false,
 
 
             });
@@ -46,11 +46,11 @@ namespace DcBotas
 
             await Task.Delay(-1);
 
-            
+
 
         }
- 
-   }
+
+    }
     public class MyCommands
     {
         [Command("nkkmhelp")]
@@ -79,7 +79,7 @@ namespace DcBotas
         [Command("kasas")]
         public async Task kasas(CommandContext commandInfo)
         {
-            await commandInfo.RespondAsync($" Labas {commandInfo.User.Mention}, aš esu  Dominyko pirmas botas kuris moka atsakinėti į komandas ir žaisti klasuimyna ");
+            await commandInfo.RespondAsync($" Labas {commandInfo.User.Mention}, aš esu  Dominyko pirmas botas kuris moka atsakinėti į komandas ir žaisti paprastus žaidimus ");
         }
 
         [Command("flip")]
@@ -87,6 +87,104 @@ namespace DcBotas
         public async Task flip(CommandContext commandInfo)
         {
             await commandInfo.RespondAsync($" {commandInfo.User.Mention}, rinkis herbas ar skaicius ");
+            var interactivity = commandInfo.Client.GetInteractivityModule();
+            string[] coinas;
+            coinas = new string[] { "herbas", "skaicius" };
+            var coinpuse = new Random().Next(coinas.Length);
+            string randomcoinasbot = coinas[coinpuse];
+            var zinute = await interactivity.WaitForMessageAsync(response => response.Content == "herbas" || response.Content == "skaicius", TimeSpan.FromMinutes(1));
+            string zmogauspuse = zinute.Message.Content.ToString();
+            if (zinute != null)
+            {
+                switch (zmogauspuse)
+                {
+                    case "herbas":
+                        switch (randomcoinasbot)
+                        {
+                            case "skaicius":
+                                await commandInfo.RespondAsync(randomcoinasbot + "\n\n As laimejau!");
+                                break;
+                            case "herbas":
+                                await commandInfo.RespondAsync(randomcoinasbot + "\n\n Tu laimejai!");
+                                break;
+                        }
+                        break;
+                    case "skaicius":
+                        switch (randomcoinasbot)
+                        {
+                            case "skaicius":
+                                await commandInfo.RespondAsync(randomcoinasbot + "\n\n  Tu laimejai!");
+                                break;
+                            case "herbas":
+                                await commandInfo.RespondAsync(randomcoinasbot + "\n\n As laimejau!");
+                                break;
+
+                        }
+                        break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -100,7 +198,17 @@ namespace DcBotas
 
         }
 
-        
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -134,48 +242,4 @@ namespace DcBotas
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
