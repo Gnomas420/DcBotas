@@ -15,6 +15,7 @@ namespace DcBotas
 {
     internal class Program
     {
+        int a;
         static DiscordClient discord;
         static CommandsNextModule commands;
         static InteractivityModule interactivity;
