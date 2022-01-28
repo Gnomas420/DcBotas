@@ -15,7 +15,7 @@ namespace DcBotas
 {
     internal class Program
     {
-        int a;
+        
         static DiscordClient discord;
         static CommandsNextModule commands;
         static InteractivityModule interactivity;
@@ -27,7 +27,7 @@ namespace DcBotas
         {
             discord = new DiscordClient(new DiscordConfiguration()
             {
-                Token = "OTMyMzA3OTIwMTE1MzUxNjMz.YeRFaQ.atrn1wj1_VfTMguzh1od9_RSerY",
+                Token = "OTMyMzA3OTIwMTE1MzUxNjMz.YeRFaQ.E-SGVbgE0cydCI05bXtzq1L5rCA",
                 TokenType = TokenType.Bot,
 
             });
@@ -74,7 +74,7 @@ namespace DcBotas
             string randomgifas = pasisveikinimogifai[pasisveikinimogifukai];
 
             await commandInfo.RespondAsync(randomgifas);
-            await commandInfo.RespondAsync($" Labas {commandInfo.User.Mention}, jei nori sužinoti daugiau apie mane rašyk /kasas\a Beto galime sužaisti klausimyna, jei  nori rašyk /klausimynas\n,jei nori galim sužaisti coin flipa /flip");
+            await commandInfo.RespondAsync($" Labas {commandInfo.User.Mention}, jei nori sužinoti daugiau apie mane rašyk /kasas \nBeto galime sužaisti klausimyna, jei  nori rašyk /klausimynas\n,jei nori galim sužaisti coin flipa /flip");
 
         }
         [Command("kasas")]
@@ -164,6 +164,8 @@ namespace DcBotas
 
             }
 
+          
+
 
 
 
@@ -198,6 +200,60 @@ namespace DcBotas
 
 
         }
+        [Command("klausimynas")]
+
+        public async Task klausimynas(CommandContext commandInfo)
+        {
+            await commandInfo.RespondAsync($"Sveikas, {commandInfo.User.Mention} suzaiskime klausimyna");
+            var interactivity = commandInfo.Client.GetInteractivityModule();
+            string[] klausimas;
+            string[] atsakymas;
+            klausimas = new string[]
+            {
+                "Senas senelis sėdi ant stogo ir pypkę rūko. kas?",
+                "Akys kaip ratai, o saulės nemato. kas?",
+                "Kabo tinklelis ne rankų darbelio miške. kas?" };
+
+
+
+
+            atsakymas = new string[]
+            {
+             "kaminas",
+             "peleda",
+             "voratinklis" };
+
+
+
+
+           
+           //rnd kl
+            int klausimai = new Random().Next(0,klausimas.Length);
+            //paim rnd
+            string atsitiktinisklausimas = klausimas[klausimai];
+            //shw
+            await commandInfo.RespondAsync(atsitiktinisklausimas);
+            var msg = await interactivity.WaitForMessageAsync(response => response.Content != null, TimeSpan.FromMinutes(1));
+            //zats
+            string zaidejoats = msg.Message.Content.ToString();
+            //tsgatspaimisstring
+            string atsakymai = atsakymas[klausimai];
+            //patikra kontrole
+            if (zaidejoats==atsakymai)
+            {
+                await commandInfo.RespondAsync($" {commandInfo.User.Mention} taisingai!");
+            }
+            else if (zaidejoats != atsakymai)
+            {
+                await commandInfo.RespondAsync($"{commandInfo.User.Mention} netaisingai atsakymas turejo buti "+atsakymai);
+            }
+
+
+
+
+
+        }
+
 
 
 
